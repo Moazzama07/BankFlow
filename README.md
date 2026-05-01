@@ -1,4 +1,4 @@
-# BankFlow Dashboard 💳
+# BankFlow Dashboard 
 
 A modern banking dashboard built with React + TypeScript + Vite.
 
