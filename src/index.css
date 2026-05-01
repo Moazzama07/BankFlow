@@ -1,0 +1,35 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+    outline: none;
+}
+
+/* Datepicker container styling */
+.react-datepicker {
+    font-family: 'Inter', sans-serif;
+    border: 1px solid #DFEAF2;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* Header color change */
+.react-datepicker__header {
+    background-color: white;
+    border-bottom: 1px solid #F5F7FA;
+}
+
+/* Active date color (#1814F3) */
+.react-datepicker__day--selected,
+.react-datepicker__day--keyboard-selected {
+    background-color: #1814F3 !important;
+    border-radius: 50%;
+}
+
+/* Input box full width fix */
+.react-datepicker-wrapper {
+    display: block !important;
+}
