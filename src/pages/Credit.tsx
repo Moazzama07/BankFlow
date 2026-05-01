@@ -2,9 +2,9 @@ import { useState } from "react";
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from "recharts";
 import ChipCardWhite from "../assets/Chip_Card.png";
 import ChipCardBlack from "../assets/Chip_Card 1.png";
-import { ShieldOff, KeyRound, Smartphone, Apple, ShoppingBag } from "lucide-react";
+import { ShieldOff, KeyRound, Smartphone, Apple, ShoppingBag, CreditCard as CardIcon } from "lucide-react";
 
-/* ─── Types ──────────────────────────────────────────────── */
+/*  Types  */
 interface Card {
     id: number;
     balance: string;
@@ -21,9 +21,11 @@ interface CardListItem {
     bank: string;
     cardNumber: string;
     holderName: string;
+    iconBg: string;
+    iconColor: string;
 }
 
-/* ─── Data ───────────────────────────────────────────────── */
+/*  Data */
 const cards: Card[] = [
     { id: 1, balance: "$5,756", holder: "Eddy Cusuma", validThru: "12/22", number: "3778 **** **** 1234", dark: true, gradient: "linear-gradient(to bottom right, #2D60FF, #539BFF)" },
     { id: 2, balance: "$5,756", holder: "Eddy Cusuma", validThru: "12/22", number: "3778 **** **** 1234", dark: true, gradient: "linear-gradient(to bottom right, #4C49ED, #0A06F4)" },
@@ -38,9 +40,9 @@ const expenseData = [
 ];
 
 const cardList: CardListItem[] = [
-    { id: 1, cardType: "Secondary", bank: "DBL Bank", cardNumber: "****  ****  5600", holderName: "William" },
-    { id: 2, cardType: "Secondary", bank: "BRC Bank", cardNumber: "****  ****  4300", holderName: "Michel" },
-    { id: 3, cardType: "Secondary", bank: "ABM Bank", cardNumber: "****  ****  7560", holderName: "Edward" },
+    { id: 1, cardType: "Secondary", bank: "DBL Bank", cardNumber: "****  ****  5600", holderName: "William", iconBg: "#E7EDFF", iconColor: "#396AFF" },
+    { id: 2, cardType: "Secondary", bank: "BRC Bank", cardNumber: "****  ****  4300", holderName: "Michel", iconBg: "#FFE8F0", iconColor: "#FF82AC" },
+    { id: 3, cardType: "Secondary", bank: "ABM Bank", cardNumber: "****  ****  7560", holderName: "Edward", iconBg: "#FFF5E6", iconColor: "#FC7900" },
 ];
 
 const cardSettings = [
@@ -51,7 +53,7 @@ const cardSettings = [
     { icon: ShoppingBag, label: "Add to Apple Store", desc: "Withdraw without any card", bg: "#E6FBF9", color: "#16DBCC" },
 ];
 
-/* ─── Sub-components ──────────────────────────────────────── */
+/*  Sub-components  */
 function CreditCard({ card }: { card: Card }) {
     return (
         <div
@@ -103,7 +105,7 @@ function SectionTitle({ title }: { title: string }) {
     );
 }
 
-/* ─── Custom Pie Label ────────────────────────────────────── */
+/*  Custom Pie Label  */
 const renderCustomLabel = (props: any) => {
     const { cx, cy, midAngle, innerRadius, outerRadius, percent, name } = props;
     const RADIAN = Math.PI / 180;
@@ -118,7 +120,7 @@ const renderCustomLabel = (props: any) => {
     );
 };
 
-/* ─── Page ────────────────────────────────────────────────── */
+/*  Page  */
 export default function CreditCards() {
     const [cardType, setCardType] = useState("Classic");
     const [nameOnCard, setNameOnCard] = useState("");
@@ -129,13 +131,14 @@ export default function CreditCards() {
         <div className="flex-1 p-7 bg-[#F5F7FA] overflow-y-auto min-h-screen font-sans">
 
             {/* ── Row 1: My Cards ──────────────────────────────────── */}
-            <div className="mb-6">
-                <SectionTitle title="My Cards" />
-                {/* 3 cards in a row, each card same width */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-                    {cards.map((card) => (
-                        <CreditCard key={card.id} card={card} />
-                    ))}
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+                <div className="lg:col-span-3">
+                    <SectionTitle title="My Cards" />
+                    <div className="grid grid-cols-3 gap-5">
+                        {cards.map((card) => (
+                            <CreditCard key={card.id} card={card} />
+                        ))}
+                    </div>
                 </div>
             </div>
 
@@ -145,15 +148,15 @@ export default function CreditCards() {
                 {/* Card Expense Statistics */}
                 <div>
                     <SectionTitle title="Card Expense Statistics" />
-                    <div className="bg-white rounded-[20px] p-6 shadow-[0_4px_20px_rgba(0,0,0,0.05)] flex flex-col items-center">
-                        <ResponsiveContainer width="100%" height={260}>
+                    <div className="bg-white rounded-[20px] p-5 shadow-[0_4px_20px_rgba(0,0,0,0.05)]">
+                        <ResponsiveContainer width="100%" height={220}>
                             <PieChart>
                                 <Pie
                                     data={expenseData}
                                     dataKey="value"
                                     cx="50%"
                                     cy="50%"
-                                    outerRadius={110}
+                                    outerRadius={95}
                                     labelLine={false}
                                     label={renderCustomLabel}
                                     strokeWidth={2}
@@ -166,11 +169,10 @@ export default function CreditCards() {
                                 <Tooltip contentStyle={{ borderRadius: "8px", border: "none", boxShadow: "0 4px 12px rgba(0,0,0,0.1)" }} />
                             </PieChart>
                         </ResponsiveContainer>
-                        {/* Legend */}
-                        <div className="flex flex-wrap justify-center gap-4 mt-2">
+                        <div className="grid grid-cols-2 gap-x-8 gap-y-2 mt-2 px-2">
                             {expenseData.map((item) => (
                                 <div key={item.name} className="flex items-center gap-2">
-                                    <span className="w-3 h-3 rounded-full inline-block" style={{ background: item.color }} />
+                                    <span className="w-3 h-3 rounded-full shrink-0" style={{ background: item.color }} />
                                     <span className="text-xs text-[#718EBF] font-medium">{item.name}</span>
                                 </div>
                             ))}
@@ -181,154 +183,138 @@ export default function CreditCards() {
                 {/* Card List */}
                 <div>
                     <SectionTitle title="Card List" />
-                    <div className="bg-white rounded-[20px] p-5 shadow-[0_4px_20px_rgba(0,0,0,0.05)] flex flex-col gap-4">
+                    <div className="bg-white rounded-[20px] p-4 shadow-[0_4px_20px_rgba(0,0,0,0.05)] flex flex-col gap-3">
                         {cardList.map((item) => (
-                            <div
-                                key={item.id}
-                                className="flex items-center gap-4"
-                            >
-                                {/* Mini Credit Card Thumbnail */}
-                                <div className="shrink-0 w-[70px] h-[48px] rounded-[10px] bg-gradient-to-br from-[#2D60FF] to-[#539BFF] p-2 flex flex-col justify-between relative overflow-hidden">
-                                    {/* card shine strip */}
-                                    <div className="absolute inset-0 bg-gradient-to-tr from-white/10 to-transparent" />
-                                    <div className="flex justify-between items-start">
-                                        <div className="w-4 h-3 rounded-[2px] bg-yellow-300/80" />
-                                    </div>
-                                    <div className="flex gap-[3px] items-center">
-                                        {[0, 1, 2, 3].map(i => (
-                                            <div key={i} className="flex gap-[2px]">
-                                                {[0, 1, 2].map(j => (
-                                                    <div key={j} className="w-[2px] h-[2px] rounded-full bg-white/70" />
-                                                ))}
-                                            </div>
-                                        ))}
-                                    </div>
-                                </div>
+                            <div key={item.id} className="flex items-center justify-between px-2 py-1">
 
-                                {/* Card Type */}
-                                <div className="min-w-[70px]">
-                                    <p className="text-[11px] text-[#718EBF]">Card Type</p>
-                                    <p className="text-[13px] font-semibold text-[#343C6A] mt-0.5">{item.cardType}</p>
+                                {/* Icon + Card Type */}
+                                <div className="flex items-center gap-3 w-[22%] min-w-[120px]">
+                                    <div className="w-10 h-10 rounded-[12px] flex items-center justify-center shrink-0" style={{ background: item.iconBg }}>
+                                        <CardIcon size={18} color={item.iconColor} strokeWidth={1.8} />
+                                    </div>
+                                    <div>
+                                        <p className="text-[10px] text-[#718EBF]">Card Type</p>
+                                        <p className="text-[13px] font-semibold text-[#343C6A]">{item.cardType}</p>
+                                    </div>
                                 </div>
 
                                 {/* Bank */}
-                                <div className="min-w-[70px]">
-                                    <p className="text-[11px] text-[#718EBF]">Bank</p>
-                                    <p className="text-[13px] font-semibold text-[#343C6A] mt-0.5">{item.bank}</p>
+                                <div className="flex-1 px-3">
+                                    <p className="text-[10px] text-[#718EBF]">Bank</p>
+                                    <p className="text-[13px] font-semibold text-[#343C6A]">{item.bank}</p>
                                 </div>
 
                                 {/* Card Number */}
-                                <div className="flex-1 min-w-[100px]">
-                                    <p className="text-[11px] text-[#718EBF]">Card Number</p>
-                                    <p className="text-[13px] font-semibold text-[#343C6A] mt-0.5 tracking-wider">{item.cardNumber}</p>
+                                <div className="flex-1 px-3">
+                                    <p className="text-[10px] text-[#718EBF]">Card Number</p>
+                                    <p className="text-[13px] font-semibold text-[#343C6A] tracking-wider">{item.cardNumber}</p>
                                 </div>
 
                                 {/* Name on Card */}
-                                <div className="min-w-[60px]">
-                                    <p className="text-[11px] text-[#718EBF]">Naman Card</p>
-                                    <p className="text-[13px] font-semibold text-[#343C6A] mt-0.5">{item.holderName}</p>
+                                <div className="flex-1 px-3">
+                                    <p className="text-[10px] text-[#718EBF]">Naman Card</p>
+                                    <p className="text-[13px] font-semibold text-[#343C6A]">{item.holderName}</p>
                                 </div>
 
                                 {/* View Details */}
-                                <button className="text-[12px] font-semibold text-[#1814F3] whitespace-nowrap hover:underline ml-auto">
-                                    View Details
-                                </button>
+                                <div className="w-[100px] text-right">
+                                    <button className="px-3 py-1.5 rounded-full border border-[#1814F3] text-[#1814F3] text-[11px] font-semibold hover:bg-[#1814F3] hover:text-white transition-all duration-200 whitespace-nowrap">
+                                        View Details
+                                    </button>
+                                </div>
+
                             </div>
                         ))}
                     </div>
                 </div>
             </div>
 
-            {/* ── Row 3: Add New Card + Card Setting ───────────────── */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            {/* Main Container */}
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch"> {/* items-stretch height barabar rakhega */}
 
-                {/* Add New Card */}
-                <div>
+                {/* Add New Card  */}
+                <div className="lg:col-span-2 flex flex-col">
                     <SectionTitle title="Add New Card" />
-                    <div className="bg-white rounded-[20px] p-6 shadow-[0_4px_20px_rgba(0,0,0,0.05)]">
-                        {/* Description text */}
-                        <p className="text-xs text-[#718EBF] mb-5 leading-relaxed">
+                    <div className="bg-white rounded-[20px] p-5 shadow-[0_4px_20px_rgba(0,0,0,0.05)] flex-1">
+                        <p className="text-[16px] text-[#718EBF] mb-4 leading-relaxed">
                             Credit Card generally means a plastic card issued by Scheduled Commercial Banks assigned to a Cardholder, with a credit limit, that can be used to purchase goods and services on credit or obtain cash advances.
                         </p>
 
-                        {/* Card Type */}
-                        <div className="mb-4">
-                            <label className="block text-xs font-semibold text-[#343C6A] mb-1">Card Type</label>
-                            <div className="relative">
-                                <select
-                                    value={cardType}
-                                    onChange={(e) => setCardType(e.target.value)}
-                                    className="w-full border border-[#DFEAF2] rounded-[10px] px-4 py-2.5 text-sm text-[#343C6A] bg-white appearance-none outline-none focus:border-[#1814F3] transition"
-                                >
-                                    <option>Classic</option>
-                                    <option>Gold</option>
-                                    <option>Platinum</option>
-                                </select>
-                                <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-[#718EBF]">▾</span>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                            <div>
+                                <label className="block text-sm font-semibold text-[#343C6A] mb-1">Card Type</label>
+                                <div className="relative">
+                                    <select
+                                        value={cardType}
+                                        onChange={(e) => setCardType(e.target.value)}
+                                        className="w-full border border-[#DFEAF2] rounded-[10px] px-3 py-2 text-xs text-[#343C6A] bg-white appearance-none outline-none focus:border-[#1814F3] transition"
+                                    >
+                                        <option value="classic">Classic</option>
+                                        <option value="gold">Gold</option>
+                                        <option value="platinum">Platinum</option>
+                                    </select>
+                                    <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-[#718EBF] text-xs">▾</span>
+                                </div>
                             </div>
-                        </div>
-
-                        {/* Name on Card */}
-                        <div className="mb-4">
-                            <label className="block text-xs font-semibold text-[#343C6A] mb-1">Name On Card</label>
-                            <input
-                                placeholder="My Cards"
-                                value={nameOnCard}
-                                onChange={(e) => setNameOnCard(e.target.value)}
-                                className="w-full border border-[#DFEAF2] rounded-[10px] px-4 py-2.5 text-sm text-[#343C6A] placeholder-[#BCCCDC] outline-none focus:border-[#1814F3] transition"
-                            />
-                        </div>
-
-                        {/* Card Number */}
-                        <div className="mb-4">
-                            <label className="block text-xs font-semibold text-[#343C6A] mb-1">Card Number</label>
-                            <input
-                                placeholder="**** **** **** ****"
-                                value={cardNumber}
-                                onChange={(e) => setCardNumber(e.target.value)}
-                                className="w-full border border-[#DFEAF2] rounded-[10px] px-4 py-2.5 text-sm text-[#343C6A] placeholder-[#BCCCDC] outline-none focus:border-[#1814F3] transition"
-                            />
-                        </div>
-
-                        {/* Expiration Date */}
-                        <div className="mb-6">
-                            <label className="block text-xs font-semibold text-[#343C6A] mb-1">Expiration Date</label>
-                            <div className="relative">
+                            <div>
+                                <label className="block text-sm font-semibold text-[#343C6A] mb-1">Name On Card</label>
                                 <input
-                                    placeholder="25 January 2025"
-                                    value={expiryDate}
-                                    onChange={(e) => setExpiryDate(e.target.value)}
-                                    className="w-full border border-[#DFEAF2] rounded-[10px] px-4 py-2.5 text-sm text-[#343C6A] placeholder-[#BCCCDC] outline-none focus:border-[#1814F3] transition"
+                                    placeholder="My Cards"
+                                    value={nameOnCard}
+                                    onChange={(e) => setNameOnCard(e.target.value)}
+                                    className="w-full border border-[#DFEAF2] rounded-[10px] px-3 py-2 text-xs text-[#343C6A] placeholder-[#BCCCDC] outline-none focus:border-[#1814F3] transition"
                                 />
-                                <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-[#718EBF]">▾</span>
                             </div>
                         </div>
 
-                        <button className="w-full bg-[#1814F3] hover:bg-[#120FD4] transition text-white rounded-[10px] py-3 text-sm font-bold shadow-md">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                            <div>
+                                <label className="block text-sm font-semibold text-[#343C6A] mb-1">Card Number</label>
+                                <input
+                                    placeholder="**** **** **** ****"
+                                    value={cardNumber}
+                                    onChange={(e) => setCardNumber(e.target.value)}
+                                    className="w-full border border-[#DFEAF2] rounded-[10px] px-3 py-2 text-xs text-[#343C6A] placeholder-[#BCCCDC] outline-none focus:border-[#1814F3] transition"
+                                />
+                            </div>
+                            <div>
+                                <label className="block text-sm font-semibold text-[#343C6A] mb-1">Expiration Date</label>
+                                <div className="relative">
+                                    <input
+                                        placeholder="25 January 2025"
+                                        value={expiryDate}
+                                        onChange={(e) => setExpiryDate(e.target.value)}
+                                        className="w-full border border-[#DFEAF2] rounded-[10px] px-3 py-2 text-xs text-[#343C6A] placeholder-[#BCCCDC] outline-none focus:border-[#1814F3] transition"
+                                    />
+                                    <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-[#718EBF] text-xs">▾</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button className="w-fit px-8 bg-[#1814F3] hover:bg-[#120FD4] transition text-white rounded-[10px] py-2.5 text-sm font-bold shadow-md">
                             Add Card
                         </button>
                     </div>
                 </div>
 
                 {/* Card Setting */}
-                <div>
+                <div className="lg:col-span-1 flex flex-col">
                     <SectionTitle title="Card Setting" />
-                    <div className="bg-white rounded-[20px] p-5 shadow-[0_4px_20px_rgba(0,0,0,0.05)] flex flex-col gap-4">
+                    <div className="bg-white rounded-[20px] p-5 shadow-[0_4px_20px_rgba(0,0,0,0.05)] flex flex-col justify-between flex-1">
                         {cardSettings.map((s, i) => {
                             const Icon = s.icon;
                             return (
                                 <div
                                     key={i}
-                                    className="flex items-center gap-4 cursor-pointer hover:bg-[#F8FAFC] rounded-[12px] px-2 py-1 transition"
+                                    className="flex items-center gap-4 w-full cursor-pointer hover:bg-[#F8FAFC] rounded-[12px] px-2 py-1.5 transition"
                                 >
-                                    {/* Icon box — fixed 44×44, consistent for all */}
                                     <div
                                         className="w-11 h-11 rounded-[12px] flex items-center justify-center shrink-0"
                                         style={{ background: s.bg }}
                                     >
                                         <Icon size={20} color={s.color} strokeWidth={1.8} />
                                     </div>
-                                    <div>
+                                    <div className="flex-1">
                                         <p className="text-sm font-semibold text-[#343C6A]">{s.label}</p>
                                         <p className="text-xs text-[#718EBF] mt-0.5">{s.desc}</p>
                                     </div>
