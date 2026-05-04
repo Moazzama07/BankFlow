@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Search, Bell, Settings } from "lucide-react";
 import userImg from "../assets/user.svg";
+import { useNavigate } from "react-router-dom";
 
 interface HeaderProps {
     pageTitle?: string;
@@ -8,7 +9,7 @@ interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = ({ pageTitle = "Overview" }) => {
     const [searchValue, setSearchValue] = useState("");
-
+    const navigate = useNavigate();
     return (
         <header className="flex items-center justify-between px-8 py-4 bg-white border-b border-gray-100 h-[80px]">
             {/* Page Title */}
@@ -30,7 +31,7 @@ const Header: React.FC<HeaderProps> = ({ pageTitle = "Overview" }) => {
                 </div>
 
                 {/* Settings Icon */}
-                <button className="w-10 h-10 flex items-center justify-center rounded-full bg-[#F5F7FA] text-[#718EBF] hover:bg-[#E8F0FF] hover:text-[#2D60FF] transition">
+                <button onClick={() => navigate("/settings")} className="w-10 h-10 flex items-center justify-center rounded-full bg-[#F5F7FA] text-[#718EBF] hover:bg-[#E8F0FF] hover:text-[#2D60FF] transition">
                     <Settings size={20} />
                 </button>
 

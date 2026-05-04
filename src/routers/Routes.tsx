@@ -12,6 +12,11 @@ const Profile = React.lazy(() => import("../pages/Settings/Profile"));
 const Investment = React.lazy(() => import("../pages/Investment"));
 const Credit = React.lazy(() => import("../pages/Credit"));
 
+// Auth Pages — Lazy loading
+const Login = React.lazy(() => import("../pages/auth/Login"));
+const SignUp = React.lazy(() => import("../pages/auth/SignUp"));
+const ForgotPassword = React.lazy(() => import("../pages/auth/ForgotPassword"));
+
 const AppRoutes: React.FC = () => {
     return (
         <BrowserRouter>
@@ -24,7 +29,12 @@ const AppRoutes: React.FC = () => {
             >
                 <Routes>
                     {/* Default redirect */}
-                    <Route path="/" element={<Navigate to="/dashboard" replace />} />
+                    <Route path="/" element={<Navigate to="/login" replace />} />
+
+                    {/* Auth Routes */}
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/signup" element={<SignUp />} />
+                    <Route path="/forgot-password" element={<ForgotPassword />} />
 
                     {/* Main routes */}
                     <Route path="/dashboard" element={<DashboardLayout pageTitle="Dashboard"><Dashboard /></DashboardLayout>} />
