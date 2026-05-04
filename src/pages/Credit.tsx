@@ -143,12 +143,12 @@ export default function CreditCards() {
             </div>
 
             {/* ── Row 2: Card Expense Statistics + Card List ───────── */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6 auto-rows-fr">
 
                 {/* Card Expense Statistics */}
-                <div>
+                <div className="flex flex-col">
                     <SectionTitle title="Card Expense Statistics" />
-                    <div className="bg-white rounded-[20px] p-5 shadow-[0_4px_20px_rgba(0,0,0,0.05)]">
+                    <div className="bg-white rounded-[20px] p-5 shadow-[0_4px_20px_rgba(0,0,0,0.05)] flex-1">
                         <ResponsiveContainer width="100%" height={220}>
                             <PieChart>
                                 <Pie
@@ -181,9 +181,9 @@ export default function CreditCards() {
                 </div>
 
                 {/* Card List */}
-                <div>
+                <div className="flex flex-col">
                     <SectionTitle title="Card List" />
-                    <div className="bg-white rounded-[20px] p-4 shadow-[0_4px_20px_rgba(0,0,0,0.05)] flex flex-col gap-3">
+                    <div className="bg-white rounded-[20px] p-4 shadow-[0_4px_20px_rgba(0,0,0,0.05)] flex flex-col gap-3 flex-1">
                         {cardList.map((item) => (
                             <div key={item.id} className="flex items-center justify-between px-2 py-1">
 
@@ -199,19 +199,19 @@ export default function CreditCards() {
                                 </div>
 
                                 {/* Bank */}
-                                <div className="flex-1 px-3">
+                                <div className="flex-1 px-4">
                                     <p className="text-[10px] text-[#718EBF]">Bank</p>
                                     <p className="text-[13px] font-semibold text-[#343C6A]">{item.bank}</p>
                                 </div>
 
                                 {/* Card Number */}
-                                <div className="flex-1 px-3">
+                                <div className="flex-1 px-4">
                                     <p className="text-[10px] text-[#718EBF]">Card Number</p>
                                     <p className="text-[13px] font-semibold text-[#343C6A] tracking-wider">{item.cardNumber}</p>
                                 </div>
 
                                 {/* Name on Card */}
-                                <div className="flex-1 px-3">
+                                <div className="flex-1 px-4">
                                     <p className="text-[10px] text-[#718EBF]">Naman Card</p>
                                     <p className="text-[13px] font-semibold text-[#343C6A]">{item.holderName}</p>
                                 </div>
