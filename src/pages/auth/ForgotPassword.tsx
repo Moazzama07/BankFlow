@@ -47,14 +47,14 @@ export default function ForgotPassword() {
         <div className="min-h-screen bg-white flex items-center justify-center p-4">
             <div className="w-full max-w-md">
                 {/* Logo/Header */}
-                <div className="text-center mb-8">
-                    <img src={logo} alt="BankFlow" className="h-12 mx-auto mb-2" />
-                    <h1 className="text-3xl font-bold text-[#343C6A] mb-2">BankFlow</h1>
-                </div>
+
 
                 {/* Forgot Password Card */}
                 <div className="bg-[#F8FAFC] rounded-[20px] p-8 shadow-[0_4px_20px_rgba(0,0,0,0.08)] border border-[#DFEAF2]">
-                    <h2 className="text-2xl font-bold text-[#343C6A] mb-2">Forgot Password?</h2>
+                    <div className="text-center mb-8">
+                        <img src={logo} alt="BankFlow" className="h-12 mx-auto mb-2" />
+                        <h1 className="text-3xl font-bold text-[#343C6A] mb-2">BankFlow</h1>
+                    </div>
                     <p className="text-sm text-[#718EBF] mb-6">
                         Enter your email address to receive a verification code.
                     </p>

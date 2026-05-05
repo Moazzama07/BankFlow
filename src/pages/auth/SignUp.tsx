@@ -65,15 +65,15 @@ export default function SignUp() {
     return (
         <div className="min-h-screen bg-white flex items-center justify-center p-4">
             <div className="w-full max-w-md">
-                <div className="text-center mb-8">
-                    <img src={logo} alt="BankFlow" className="h-12 mx-auto mb-2" />
-                    <h1 className="text-3xl font-bold text-[#343C6A] mb-2">BankFlow</h1>
-                    <p className="text-[#718EBF] text-sm">Create your account to get started</p>
-                </div>
 
                 {/* Sign Up Card */}
                 <div className="bg-[#F8FAFC] rounded-[20px] p-8 shadow-[0_4px_20px_rgba(0,0,0,0.08)] border border-[#DFEAF2]">
-                    <h2 className="text-2xl font-bold text-[#343C6A] mb-6">Sign Up</h2>
+                    <div className="text-center mb-8">
+                        <img src={logo} alt="BankFlow" className="h-12 mx-auto mb-2" />
+                        <h1 className="text-3xl font-bold text-[#343C6A] mb-2">BankFlow</h1>
+                        <p className="text-[#718EBF] text-sm">Create your account to get started</p>
+                    </div>
+
 
                     {error && (
                         <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-[10px] text-red-600 text-sm">
