@@ -104,9 +104,13 @@ export default function Login() {
                                 <input type="checkbox" className="w-4 h-4 accent-[#1814F3]" />
                                 <span className="text-[#718EBF] font-medium">Remember me</span>
                             </label>
-                            <a onClick={() => navigate("/forgot-password")} className="text-[#1814F3] font-medium hover:underline">
+                            <button
+                                type="button"
+                                onClick={() => navigate("/forgot-password")}
+                                className="text-[#1814F3] font-medium hover:underline"
+                            >
                                 Forgot Password?
-                            </a>
+                            </button>
                         </div>
 
                         {/* Login Button */}
