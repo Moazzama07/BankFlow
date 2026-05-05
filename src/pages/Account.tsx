@@ -1,10 +1,6 @@
-import {
-    BarChart, Bar, XAxis, Tooltip,
-    ResponsiveContainer, CartesianGrid,
-} from "recharts";
+import { BarChart, Bar, XAxis, Tooltip, ResponsiveContainer, CartesianGrid, } from "recharts";
 import ChipCardWhite from "../assets/Chip_Card.png";
 import ChipCardBlack from "../assets/Chip_Card 1.png";
-// ── Icons ──────────────────────────────────────────────────────────────────
 import { Wallet, TrendingUp, TrendingDown, PiggyBank, Music, Wrench, User, Apple, Gamepad2 } from "lucide-react";
 
 const WalletIcon = () => (
@@ -31,7 +27,7 @@ const SavingIcon = () => (
     </div>
 );
 
-// ── Types ──────────────────────────────────────────────────────────────────
+//  Types
 interface Card {
     id: number;
     balance: string;
@@ -59,7 +55,6 @@ interface Invoice {
     amount: string;
 }
 
-// ── Data ───────────────────────────────────────────────────────────────────
 const statsData = [
     { label: "My Balance", value: "$12,750", Icon: WalletIcon },
     { label: "Income", value: "$5,600", Icon: IncomeIcon },
@@ -142,7 +137,7 @@ const invoices: Invoice[] = [
     },
 ];
 
-// ── CreditCard ─────────────────────────────────────────────────────────────
+// CreditCard 
 function CreditCard({ card }: { card: Card }) {
     return (
         <div
@@ -186,7 +181,6 @@ function CreditCard({ card }: { card: Card }) {
     );
 }
 
-// ── SectionTitle ───────────────────────────────────────────────────────────
 function SectionTitle({ title, link }: { title: string; link?: string }) {
     return (
         <div className="flex items-center justify-between mb-4">
@@ -196,7 +190,6 @@ function SectionTitle({ title, link }: { title: string; link?: string }) {
     );
 }
 
-// ── StatusBadge ────────────────────────────────────────────────────────────
 function StatusBadge({ status }: { status: "Pending" | "Completed" }) {
     return (
         <span className={`px-3 py-1 rounded-full text-xs font-semibold font-sans
@@ -206,7 +199,6 @@ function StatusBadge({ status }: { status: "Pending" | "Completed" }) {
     );
 }
 
-// ── Custom Tooltip for Bar Chart ───────────────────────────────────────────
 const CustomTooltip = ({ active, payload, label }: any) => {
     if (active && payload && payload.length) {
         return (
@@ -223,7 +215,7 @@ const CustomTooltip = ({ active, payload, label }: any) => {
     return null;
 };
 
-// ── Main Page ──────────────────────────────────────────────────────────────
+
 export default function Account() {
     return (
         <div className="flex-1 p-6 bg-[#F5F7FA] overflow-y-auto min-h-screen font-sans">
@@ -244,8 +236,6 @@ export default function Account() {
             </div>
             {/* ── Row 2: Last Transaction + My Card ── */}
             <div className="grid grid-cols-1 lg:grid-cols-6 gap-6 mb-6 items-stretch">
-
-                {/* Last Transaction */}
                 <div className="lg:col-span-4 flex flex-col">
                     <SectionTitle title="Last Transaction" />
                     <div className="bg-white rounded-[20px] shadow-[0_4px_20px_rgba(0,0,0,0.04)] overflow-hidden flex-1">
@@ -261,7 +251,7 @@ export default function Account() {
                                                         {tx.icon}
                                                     </span>
                                                     <div>
-                                                        {/* Name ko thora bara aur dark kiya */}
+
                                                         <p className="font-bold text-[#343C6A] text-[15px] whitespace-nowrap leading-tight">
                                                             {tx.name}
                                                         </p>
@@ -272,17 +262,17 @@ export default function Account() {
                                                 </div>
                                             </td>
 
-                                            {/* Type Column - Text refined */}
+
                                             <td className="px-4 py-4 text-[#718EBF] text-[14px] font-medium">
                                                 {tx.type}
                                             </td>
 
-                                            {/* Card Number Column */}
+
                                             <td className="px-4 py-4 text-[#718EBF] text-[14px] font-medium">
                                                 {tx.cardLast}
                                             </td>
 
-                                            {/* Status Badge */}
+
                                             <td className="px-4 py-4">
                                                 <StatusBadge status={tx.status} />
                                             </td>
@@ -313,19 +303,15 @@ export default function Account() {
             {/* ── Row 3: Debit & Credit Overview + Invoices Sent ── */}
             <div className="grid grid-cols-1 lg:grid-cols-6 gap-6 mb-6 items-stretch">
 
-                {/* Debit & Credit Overview */}
                 <div className="lg:col-span-4 flex flex-col">
                     <SectionTitle title="Debit & Credit Overview" />
                     <div className="bg-white rounded-[20px] p-5 shadow-[0_4px_20px_rgba(0,0,0,0.04)]">
 
-                        {/* Custom Header: Numbers and Legend on the same line */}
                         <div className="flex flex-wrap items-center justify-between mb-4 gap-4">
                             <p className="text-sm text-[#718EBF] font-sans">
                                 <span className="text-[#343C6A] font-bold">$7,560</span> Debited &amp;{" "}
                                 <span className="text-[#343C6A] font-bold">$5,420</span> Credited in this Week
                             </p>
-
-                            {/* Custom Legend UI */}
                             <div className="flex items-center gap-4 text-xs font-sans text-[#718EBF]">
                                 <div className="flex items-center gap-2">
                                     <span className="w-4 h-4 rounded-[4px] bg-[#4C78FF]"></span>
@@ -345,8 +331,6 @@ export default function Account() {
 
                                 <Tooltip content={<CustomTooltip />} cursor={{ fill: "rgba(0,0,0,0.02)" }} />
 
-                                {/* Recharts Legend removed because we made a custom one above */}
-
                                 <Bar dataKey="debit" name="Debit" fill="#1A16F3" radius={[6, 6, 0, 0]} />
                                 <Bar dataKey="credit" name="Credit" fill="#FCAA0B" radius={[6, 6, 0, 0]} />
                             </BarChart>
@@ -357,33 +341,30 @@ export default function Account() {
                 <div className="lg:col-span-2 flex flex-col">
                     <SectionTitle title="Invoices Sent" />
 
-                    {/* flex-1 aur justify-between se content box ki height ke mutabiq stretch hoga */}
+
                     <div className="bg-white rounded-[20px] p-6 shadow-[0_4px_20px_rgba(0,0,0,0.04)] flex flex-col justify-between flex-1 min-h-[250px]">
                         {invoices.map((inv, i) => (
-                            <div key={i} className="flex items-center justify-between py-1"> {/* Thora vertical padding */}
-                                <div className="flex items-center gap-4"> {/* Gap thora barha diya */}
+                            <div key={i} className="flex items-center justify-between py-1">
+                                <div className="flex items-center gap-4">
 
-                                    {/* Icon container ka size 10 se 12 kar diya (w-12 h-12) */}
+
                                     <span className="w-12 h-12 rounded-full bg-[#F5F7FA] flex items-center justify-center shrink-0">
-                                        {/* Yahan dhyan dein: Agar icon inv.icon se aa raha hai, 
-                           toh data array mein Lucide icon ki size className="w-6 h-6" honi chahiye 
-                        */}
+
                                         {inv.icon}
                                     </span>
 
                                     <div>
-                                        {/* Text size text-sm se text-base (16px) kar diya */}
+
                                         <p className="text-base font-bold text-[#343C6A] font-sans leading-tight">
                                             {inv.name}
                                         </p>
-                                        {/* Time ka size text-xs se text-sm kar diya */}
+
                                         <p className="text-sm text-[#718EBF] font-sans mt-0.5">
                                             {inv.time}
                                         </p>
                                     </div>
                                 </div>
 
-                                {/* Amount ka size text-sm se text-base kar diya */}
                                 <span className="text-sm font-extrabold text-[#718EBF] font-sans">
                                     {inv.amount}
                                 </span>

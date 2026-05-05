@@ -2,7 +2,7 @@ import React, { useState, useRef } from "react";
 import userImg from "../../assets/user.svg";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-// ── Types ──────────────────────────────────────────────────────────────────
+// Types 
 
 type Tab = "edit-profile" | "preferences" | "security";
 
@@ -19,7 +19,7 @@ interface ProfileForm {
     country: string;
 }
 
-// ── Static Data ────────────────────────────────────────────────────────────
+// Static Data 
 
 const TABS: { id: Tab; label: string }[] = [
     { id: "edit-profile", label: "Edit Profile" },
@@ -40,7 +40,7 @@ const INITIAL_FORM: ProfileForm = {
     country: "USA",
 };
 
-// ── Shared: SaveButton ─────────────────────────────────────────────────────
+// Shared: SaveButton 
 
 const SaveButton: React.FC<{ onClick?: () => void }> = ({ onClick }) => (
     <button
@@ -54,7 +54,7 @@ const SaveButton: React.FC<{ onClick?: () => void }> = ({ onClick }) => (
     </button>
 );
 
-// ── Shared: FormField ──────────────────────────────────────────────────────
+// Shared: FormField 
 
 interface FormFieldProps {
     label: string;
@@ -94,8 +94,7 @@ const FormField: React.FC<FormFieldProps> = ({
     </div>
 );
 
-// ── Tab 1: Edit Profile ────────────────────────────────────────────────────
-
+// Edit Profile 
 interface EditProfileTabProps {
     form: ProfileForm;
     avatarSrc: string;
@@ -214,8 +213,7 @@ const EditProfileTab: React.FC<EditProfileTabProps> = ({
     );
 };
 
-// ── Tab 2: Preferences ─────────────────────────────────────────────────────
-
+// Preferences 
 const PreferencesTab: React.FC = () => {
     const [currency, setCurrency] = useState("USD");
     const [timezone, setTimezone] = useState("GMT-5 (Eastern)");
@@ -258,7 +256,7 @@ const PreferencesTab: React.FC = () => {
                 </div>
             </div>
 
-            {/* Notification Toggles Section */}
+            {/* Notification */}
             <div className="flex flex-col gap-4">
                 <label className="text-xs font-semibold text-[#232323] font-sans">Notifications</label>
                 <div className="space-y-3">
@@ -286,8 +284,7 @@ const PreferencesTab: React.FC = () => {
 };
 
 
-// ── Tab 3: Security ────────────────────────────────────────────────────────
-
+// Security 
 const SecurityTab: React.FC = () => {
     const [passwords, setPasswords] = useState({ current: "", newPass: "", confirm: "" });
 
@@ -344,7 +341,7 @@ const SecurityTab: React.FC = () => {
     );
 };
 
-// ── Main Page ──────────────────────────────────────────────────────────────
+//  Main Page 
 
 export default function Profile() {
     const [activeTab, setActiveTab] = useState<Tab>("edit-profile");

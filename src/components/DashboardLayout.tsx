@@ -14,12 +14,12 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children, pageTitle }
             <Sidebar />
 
             {/* Main Content */}
-            <div className="flex flex-col flex-1">
+            <div className="flex flex-col flex-1 lg:ml-[250px]">
                 {/* Header */}
                 <Header pageTitle={pageTitle} />
 
                 {/* Page Content */}
-                <main className="flex-1 p-8 overflow-auto">
+                <main className="flex-1 p-4 md:p-6 lg:p-8 overflow-auto">
                     {children}
                 </main>
             </div>

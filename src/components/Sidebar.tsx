@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import logo from "../assets/logo2.svg";
 
@@ -10,7 +10,10 @@ import {
     CreditCard,
     Landmark,
     Settings,
-    Wrench
+    Wrench,
+    LogOut,
+    Menu,
+    X
 } from "lucide-react";
 
 interface NavItem {
@@ -33,53 +36,110 @@ const navItems: NavItem[] = [
 const Sidebar: React.FC = () => {
     const navigate = useNavigate();
     const { pathname } = useLocation();
+    const [isMobileOpen, setIsMobileOpen] = useState(false);
+
+    const handleLogout = () => {
+        localStorage.removeItem("authToken");
+        sessionStorage.clear();
+        navigate("/login");
+    };
+
+    const toggleMobileSidebar = () => {
+        setIsMobileOpen(!isMobileOpen);
+    };
+
+    const handleNavClick = (href: string) => {
+        navigate(href);
+        if (isMobileOpen) {
+            setIsMobileOpen(false);
+        }
+    };
 
     return (
-        <aside className="flex flex-col w-[250px] min-h-screen bg-white border-r border-gray-100 py-6">
+        <>
+            {/* Mobile Menu Button */}
+            <button
+                onClick={toggleMobileSidebar}
+                className="fixed top-4 left-4 z-50 lg:hidden p-2 hover:bg-gray-100 rounded-lg transition"
+                aria-label="Toggle menu"
+            >
+                {isMobileOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
 
-            {/* Logo */}
-            <div className="flex items-center gap-2 px-6 mb-8">
-                <div className="w-8 h-8 flex items-center justify-center">
-                    <img src={logo} alt="logo" />
+            {/* Mobile Overlay */}
+            {isMobileOpen && (
+                <div
+                    className="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden"
+                    onClick={() => setIsMobileOpen(false)}
+                />
+            )}
+
+            {/* Sidebar */}
+            <aside
+                className={`fixed left-0 top-0 flex flex-col w-[250px] bg-white border-r border-gray-100 h-screen z-50 transition-all duration-300 ease-in-out
+                    ${isMobileOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"}
+                `}
+            >
+                {/* Logo Section */}
+                <div className="flex items-center gap-2 px-6 py-6 border-b border-gray-100">
+                    <div className="w-8 h-8 flex items-center justify-center flex-shrink-0">
+                        <img src={logo} alt="logo" />
+                    </div>
+                    <span className="text-[#343C6A] font-bold text-xl tracking-tight whitespace-nowrap">
+                        BankFlow
+                    </span>
                 </div>
-                <span className="text-[#343C6A] font-bold font-sans text-xl tracking-tight">
-                    BankFlow
-                </span>
-            </div>
 
-            {/* Nav Items */}
-            <nav className="flex flex-col gap-1 flex-1 px-4">
-                {navItems.map((item) => {
-                    const isActive = pathname === item.href;
+                {/* Nav Items */}
+                <nav className="flex flex-col gap-2 flex-1 px-3 py-6 overflow-y-auto scrollbar-hide">
+                    {navItems.map((item) => {
+                        const isActive = pathname === item.href;
 
-                    return (
-                        <button
-                            key={item.label}
-                            onClick={() => navigate(item.href)}
-                            className={`relative flex items-center gap-4 px-4 py-3 rounded-xl text-sm font-medium font-sans transition w-full text-left
-                                ${isActive
-                                    ? "bg-[#E8F0FF] text-[#2D60FF]"
-                                    : "text-[#B1B1B1] hover:bg-gray-50"
-                                }`}
-                        >
-                            {/* Left blue indicator */}
-                            <span
-                                className={`absolute right-0 top-0 h-full w-[4px] bg-[#2D60FF] rounded-r-xl transition-all duration-200
-                                    ${isActive ? "opacity-100" : "opacity-0"}`}
-                            />
+                        return (
+                            <button
+                                key={item.label}
+                                onClick={() => handleNavClick(item.href)}
+                                title={item.label}
+                                className={`relative flex items-center gap-4 px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200 group
+                                    ${isActive
+                                        ? "bg-[#E8F0FF] text-[#2D60FF]"
+                                        : "text-[#B1B1B1] hover:bg-gray-50"
+                                    }
+                                `}
+                            >
+                                {/* Right side indicator */}
+                                <span
+                                    className={`absolute right-0 top-0 h-full w-[4px] bg-[#2D60FF] rounded-r-xl transition-all duration-200
+                                        ${isActive ? "opacity-100" : "opacity-0"}
+                                    `}
+                                />
 
-                            {/* Icon */}
-                            <span className={`transition ${isActive ? "text-[#2D60FF]" : "text-[#B1B1B1]"}`}>
-                                {item.icon}
-                            </span>
+                                {/* Icon */}
+                                <span className={`transition flex-shrink-0 ${isActive ? "text-[#2D60FF]" : "text-[#B1B1B1] group-hover:text-[#2D60FF]"}`}>
+                                    {item.icon}
+                                </span>
 
-                            {/* Label */}
-                            <span>{item.label}</span>
-                        </button>
-                    );
-                })}
-            </nav>
-        </aside>
+                                {/* Label */}
+                                <span className="truncate">{item.label}</span>
+                            </button>
+                        );
+                    })}
+                </nav>
+
+                {/* Logout Section */}
+                <div className="px-3 py-4 border-t border-gray-100">
+                    {/* Logout Button */}
+                    <button
+                        onClick={handleLogout}
+                        className="flex items-center gap-4 px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200 w-full text-red-600"
+                    >
+                        <LogOut size={20} />
+                        <span>Logout</span>
+                    </button>
+                </div>
+            </aside>
+
+        </>
     );
 };
 

@@ -119,7 +119,7 @@ export default function Login() {
                         </button>
                     </form>
 
-                    {/* Sign Up Link */}
+                    {/* Sign Up  */}
                     <p className="text-center text-sm text-[#718EBF] mt-6">
                         Don't have an account?{" "}
                         <button

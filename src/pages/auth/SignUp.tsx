@@ -65,7 +65,6 @@ export default function SignUp() {
     return (
         <div className="min-h-screen bg-white flex items-center justify-center p-4">
             <div className="w-full max-w-md">
-                {/* Logo/Header */}
                 <div className="text-center mb-8">
                     <img src={logo} alt="BankFlow" className="h-12 mx-auto mb-2" />
                     <h1 className="text-3xl font-bold text-[#343C6A] mb-2">BankFlow</h1>
@@ -105,7 +104,7 @@ export default function SignUp() {
                             </div>
                         </div>
 
-                        {/* Email Field */}
+                        {/* Email */}
                         <div>
                             <label className="block text-sm font-semibold text-[#343C6A] mb-2">
                                 Email Address
@@ -127,7 +126,7 @@ export default function SignUp() {
                             </div>
                         </div>
 
-                        {/* Password Field */}
+                        {/* Password */}
                         <div>
                             <label className="block text-sm font-semibold text-[#343C6A] mb-2">
                                 Password
@@ -156,7 +155,7 @@ export default function SignUp() {
                             </div>
                         </div>
 
-                        {/* Confirm Password Field */}
+                        {/* Confirm Password */}
                         <div>
                             <label className="block text-sm font-semibold text-[#343C6A] mb-2">
                                 Confirm Password
@@ -196,7 +195,7 @@ export default function SignUp() {
                             </span>
                         </label>
 
-                        {/* Sign Up Button */}
+                        {/* Sign Up */}
                         <button
                             type="submit"
                             disabled={loading}
@@ -206,7 +205,7 @@ export default function SignUp() {
                         </button>
                     </form>
 
-                    {/* Login Link */}
+                    {/* Login*/}
                     <p className="text-center text-sm text-[#718EBF] mt-6">
                         Already have an account?{" "}
                         <button

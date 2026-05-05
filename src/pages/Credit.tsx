@@ -130,7 +130,6 @@ export default function CreditCards() {
     return (
         <div className="flex-1 p-7 bg-[#F5F7FA] overflow-y-auto min-h-screen font-sans">
 
-            {/* ── Row 1: My Cards ──────────────────────────────────── */}
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
                 <div className="lg:col-span-3">
                     <SectionTitle title="My Cards" />
@@ -142,10 +141,9 @@ export default function CreditCards() {
                 </div>
             </div>
 
-            {/* ── Row 2: Card Expense Statistics + Card List ───────── */}
+            {/* Card Expense Statistics + Card List */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6 auto-rows-fr">
 
-                {/* Card Expense Statistics */}
                 <div className="flex flex-col">
                     <SectionTitle title="Card Expense Statistics" />
                     <div className="bg-white rounded-[20px] p-5 shadow-[0_4px_20px_rgba(0,0,0,0.05)] flex-1">
@@ -187,7 +185,7 @@ export default function CreditCards() {
                         {cardList.map((item) => (
                             <div key={item.id} className="flex items-center justify-between px-2 py-1">
 
-                                {/* Icon + Card Type */}
+
                                 <div className="flex items-center gap-3 w-[22%] min-w-[120px]">
                                     <div className="w-10 h-10 rounded-[12px] flex items-center justify-center shrink-0" style={{ background: item.iconBg }}>
                                         <CardIcon size={18} color={item.iconColor} strokeWidth={1.8} />
@@ -198,25 +196,25 @@ export default function CreditCards() {
                                     </div>
                                 </div>
 
-                                {/* Bank */}
+
                                 <div className="flex-1 px-4">
                                     <p className="text-[10px] text-[#718EBF]">Bank</p>
                                     <p className="text-[13px] font-semibold text-[#343C6A]">{item.bank}</p>
                                 </div>
 
-                                {/* Card Number */}
+
                                 <div className="flex-1 px-4">
                                     <p className="text-[10px] text-[#718EBF]">Card Number</p>
                                     <p className="text-[13px] font-semibold text-[#343C6A] tracking-wider">{item.cardNumber}</p>
                                 </div>
 
-                                {/* Name on Card */}
+
                                 <div className="flex-1 px-4">
                                     <p className="text-[10px] text-[#718EBF]">Naman Card</p>
                                     <p className="text-[13px] font-semibold text-[#343C6A]">{item.holderName}</p>
                                 </div>
 
-                                {/* View Details */}
+
                                 <div className="w-[100px] text-right">
                                     <button className="px-3 py-1.5 rounded-full border border-[#1814F3] text-[#1814F3] text-[11px] font-semibold hover:bg-[#1814F3] hover:text-white transition-all duration-200 whitespace-nowrap">
                                         View Details

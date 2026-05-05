@@ -42,7 +42,7 @@ const Header: React.FC<HeaderProps> = ({ pageTitle = "Overview" }) => {
                 </button>
 
                 {/* Avatar */}
-                <button className="w-10 h-10 rounded-full overflow-hidden bg-gray-100">
+                <button onClick={() => navigate("/settings/profile")} className="w-10 h-10 rounded-full overflow-hidden bg-gray-100">
                     <img
                         src={userImg}
                         alt="User Avatar"
