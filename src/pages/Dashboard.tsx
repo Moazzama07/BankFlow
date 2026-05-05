@@ -3,6 +3,9 @@ import { AreaChart, Area, BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContai
 import ChipCardWhite from "../assets/Chip_Card.png";
 import ChipCardBlack from "../assets/Chip_Card 1.png";
 import { CreditCardIcon, Wallet, User, type LucideIcon } from "lucide-react";
+import user1 from "../assets/1.svg"
+import user2 from "../assets/2.svg";
+import user3 from "../assets/3.svg";
 
 interface Card {
     id: number;
@@ -97,9 +100,9 @@ const expenseData = [
 ];
 
 const contacts: Contact[] = [
-    { id: 1, avatar: "/src/assets/1.svg", name: "Livia Bator", role: "CEO" },
-    { id: 2, avatar: "/src/assets/2.svg", name: "Randy Press", role: "Director" },
-    { id: 3, avatar: "/src/assets/3.svg", name: "Workman", role: "Designer" },
+    { id: 1, avatar: user1, name: "Livia Bator", role: "CEO" },
+    { id: 2, avatar: user2, name: "Randy Press", role: "Director" },
+    { id: 3, avatar: user3, name: "Workman", role: "Designer" },
 ];
 
 const balanceHistory = [
@@ -322,7 +325,7 @@ export default function Dashboard() {
             <div className="flex gap-6 flex-wrap">
 
                 {/* Quick Transfer */}
-                <div className="flex-[0_1_320px] min-w-[280px] font-sanss">
+                <div className="flex-[0_1_320px] min-w-[280px] font-sans">
                     <SectionTitle title="Quick Transfer" />
                     <div className="bg-white rounded-[20px] p-6 shadow-[0_4px_20px_rgba(0,0,0,0.05)] font-sans">
                         <div className="flex gap-5 mb-6 overflow-x-auto">
