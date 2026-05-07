@@ -218,18 +218,27 @@ const CustomTooltip = ({ active, payload, label }: any) => {
 
 export default function Account() {
     return (
-        <div className="flex-1 p-6 bg-[#F5F7FA] overflow-y-auto min-h-screen font-sans">
+        <div className="flex-1 p-4 sm:p-6 bg-[#F5F7FA] overflow-y-auto min-h-screen font-sans">
 
             {/* ── Stats Grid ── */}
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+            <div className="grid grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-3 sm:gap-4 mb-6">
                 {statsData.map(({ label, value, Icon }) => (
-                    <div key={label} className="bg-white rounded-[15px] p-5 flex items-center gap-4 shadow-[0_4px_20px_rgba(0,0,0,0.04)]">
-                        <div className="shrink-0">
+                    <div
+                        key={label}
+                        className="bg-white rounded-[15px] p-3 sm:p-5 flex items-center gap-2 sm:gap-4 shadow-[0_4px_20px_rgba(0,0,0,0.04)]"
+                    >
+                        <div className="shrink-0 scale-90 sm:scale-100">
                             <Icon />
                         </div>
-                        <div>
-                            <p className="text-xs text-[#718EBF] font-sans mb-1">{label}</p>
-                            <p className="text-lg font-bold text-[#343C6A] font-sans">{value}</p>
+
+                        <div className="min-w-0">
+                            <p className="text-[10px] sm:text-xs text-[#718EBF] mb-1 truncate">
+                                {label}
+                            </p>
+
+                            <p className="text-sm sm:text-lg font-bold text-[#343C6A] truncate">
+                                {value}
+                            </p>
                         </div>
                     </div>
                 ))}
