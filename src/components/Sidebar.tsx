@@ -50,6 +50,7 @@ const Sidebar: React.FC = () => {
 
     const handleNavClick = (href: string) => {
         navigate(href);
+
         if (isMobileOpen) {
             setIsMobileOpen(false);
         }
@@ -77,7 +78,10 @@ const Sidebar: React.FC = () => {
             {/* Sidebar */}
             <aside
                 className={`fixed left-0 top-0 flex flex-col w-[250px] bg-white border-r border-gray-100 h-screen z-50 transition-all duration-300 ease-in-out
-                    ${isMobileOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"}
+                    ${isMobileOpen
+                        ? "translate-x-0"
+                        : "-translate-x-full lg:translate-x-0"
+                    }
                 `}
             >
                 {/* Logo Section */}
@@ -85,6 +89,7 @@ const Sidebar: React.FC = () => {
                     <div className="w-8 h-8 flex items-center justify-center flex-shrink-0">
                         <img src={logo} alt="logo" />
                     </div>
+
                     <span className="text-[#343C6A] font-bold text-xl tracking-tight whitespace-nowrap">
                         BankFlow
                     </span>
@@ -110,17 +115,29 @@ const Sidebar: React.FC = () => {
                                 {/* Right side indicator */}
                                 <span
                                     className={`absolute right-0 top-0 h-full w-[4px] bg-[#2D60FF] rounded-r-xl transition-all duration-200
-                                        ${isActive ? "opacity-100" : "opacity-0"}
+                                        ${isActive
+                                            ? "opacity-100"
+                                            : "opacity-0"
+                                        }
                                     `}
                                 />
 
                                 {/* Icon */}
-                                <span className={`transition flex-shrink-0 ${isActive ? "text-[#2D60FF]" : "text-[#B1B1B1] group-hover:text-[#2D60FF]"}`}>
+                                <span
+                                    className={`transition flex-shrink-0
+                                        ${isActive
+                                            ? "text-[#2D60FF]"
+                                            : "text-[#B1B1B1] group-hover:text-[#2D60FF]"
+                                        }
+                                    `}
+                                >
                                     {item.icon}
                                 </span>
 
                                 {/* Label */}
-                                <span className="truncate">{item.label}</span>
+                                <span className="truncate">
+                                    {item.label}
+                                </span>
                             </button>
                         );
                     })}
@@ -128,7 +145,6 @@ const Sidebar: React.FC = () => {
 
                 {/* Logout Section */}
                 <div className="px-3 py-4 border-t border-gray-100">
-                    {/* Logout Button */}
                     <button
                         onClick={handleLogout}
                         className="flex items-center gap-4 px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200 w-full text-red-600"
@@ -138,7 +154,6 @@ const Sidebar: React.FC = () => {
                     </button>
                 </div>
             </aside>
-
         </>
     );
 };
