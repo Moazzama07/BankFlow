@@ -129,21 +129,18 @@ const BANK_SERVICES: BankService[] = [
 
 const TopServiceCard = ({ card }: { card: ServiceCard }) => {
     return (
-        <div className="bg-white rounded-2xl p-4 flex items-center gap-4 shadow-sm">
-
-            {/* ICON WRAPPER (same as Wallet style) */}
-            <div className={`w-10 h-10 flex items-center justify-center rounded-xl ${card.iconBg}`}>
-                <div className={card.iconColor}>
-                    {card.icon}
-                </div>
+        <div className="bg-white rounded-2xl p-4 flex items-center gap-4 shadow-sm w-full">
+            <div
+                className={`w-10 h-10 flex items-center justify-center rounded-xl shrink-0 ${card.iconBg}`}
+            >
+                <div className={card.iconColor}>{card.icon}</div>
             </div>
 
-            {/* TEXT */}
-            <div>
-                <p className="text-sm font-semibold text-[#232323]">
+            <div className="min-w-0">
+                <p className="text-sm font-semibold text-[#232323] truncate">
                     {card.label}
                 </p>
-                <p className="text-xs text-[#718EBF]">
+                <p className="text-xs text-[#718EBF] truncate">
                     {card.subLabel}
                 </p>
             </div>
@@ -153,17 +150,34 @@ const TopServiceCard = ({ card }: { card: ServiceCard }) => {
 
 const TwoLineCell: React.FC<{ text: string }> = ({ text }) => {
     const [line1, line2] = text.split("\n");
+
     return (
         <div>
-            <p className="text-sm text-[#343C6A] font-sans">{line1}</p>
-            <p className="text-xs text-[#718EBF] font-sans mt-0.5">{line2}</p>
+            <p className="text-sm text-[#343C6A] font-sans">
+                {line1}
+            </p>
+            <p className="text-xs text-[#718EBF] font-sans mt-0.5">
+                {line2}
+            </p>
         </div>
     );
 };
 
 const ViewDetailsButton: React.FC = () => (
-    <button className="px-4 py-1.5 rounded-full border border-[#1814F3] text-[#1814F3] text-xs font-semibold
-        font-sans hover:bg-[#1814F3] hover:text-white transition-all duration-200 whitespace-nowrap">
+    <button
+        className="
+            w-full sm:w-auto
+            px-4 py-2
+            rounded-full
+            border border-[#1814F3]
+            text-[#1814F3]
+            text-xs font-semibold
+            font-sans
+            hover:bg-[#1814F3]
+            hover:text-white
+            transition-all duration-200
+        "
+    >
         View Details
     </button>
 );
@@ -174,61 +188,75 @@ export default function Service() {
     const [hoveredRow, setHoveredRow] = useState<string | null>(null);
 
     return (
-        <div className="flex-1 p-6 bg-[#F5F7FA] overflow-y-auto min-h-screen font-sans">
+        <div className="flex-1 w-full p-4 sm:p-6 bg-[#F5F7FA] overflow-x-hidden min-h-screen font-sans">
 
-            {/* Top Cards Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+            {/* Top Cards */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
                 {SERVICE_CARDS.map((card) => (
                     <TopServiceCard key={card.id} card={card} />
                 ))}
             </div>
 
-            {/* List Header */}
+            {/* Header */}
             <h2 className="text-base font-bold text-[#343C6A] mb-4 px-1">
                 Bank Services List
             </h2>
 
-            {/* Figma Style List with Gaps */}
-            <div className="flex flex-col gap-4 mb-8">
+            {/* Services */}
+            <div className="flex flex-col gap-4 pb-6">
                 {BANK_SERVICES.map((svc) => (
                     <div
                         key={svc.id}
                         onMouseEnter={() => setHoveredRow(svc.id)}
                         onMouseLeave={() => setHoveredRow(null)}
-                        className={`flex items-center justify-between bg-white rounded-[20px] p-4 px-6 
-                            shadow-[0_4px_20px_rgba(0,0,0,0.02)] transition-colors duration-150
-                            ${hoveredRow === svc.id ? "bg-[#F9FAFB]" : "bg-white"}`}
+                        className={`
+                            bg-white rounded-[20px]
+                            p-4
+                            shadow-[0_4px_20px_rgba(0,0,0,0.02)]
+                            transition-all duration-200
+                            w-full
+                            overflow-hidden
+                            ${hoveredRow === svc.id ? "bg-[#F9FAFB]" : "bg-white"}
+                        `}
                     >
-                        {/* 1. Service Info */}
-                        <div className="flex items-center gap-4 w-[25%] min-w-[200px]">
-                            <div className={`w-12 h-12 rounded-[15px] ${svc.iconBg}
-                                flex items-center justify-center shrink-0 text-[#343C6A]`}>
-                                {svc.icon}
-                            </div>
-                            <div className="overflow-hidden">
-                                <p className="text-sm font-bold text-[#343C6A] leading-tight truncate">
-                                    {svc.name}
-                                </p>
-                                <p className="text-xs text-[#718EBF] mt-0.5 truncate">
-                                    {svc.description}
-                                </p>
-                            </div>
-                        </div>
+                        {/* MOBILE + DESKTOP RESPONSIVE */}
+                        <div className="flex flex-col lg:flex-row lg:items-center gap-5">
 
-                        {/* 2. Content Columns */}
-                        <div className="flex-1 px-4">
-                            <TwoLineCell text={svc.col1} />
-                        </div>
-                        <div className="flex-1 px-4">
-                            <TwoLineCell text={svc.col2} />
-                        </div>
-                        <div className="flex-1 px-4">
-                            <TwoLineCell text={svc.col3} />
-                        </div>
+                            {/* Service Info */}
+                            <div className="flex items-start gap-4 w-full lg:w-[25%] min-w-0">
+                                <div
+                                    className={`
+                                        w-12 h-12 rounded-[15px]
+                                        ${svc.iconBg}
+                                        flex items-center justify-center
+                                        shrink-0 text-[#343C6A]
+                                    `}
+                                >
+                                    {svc.icon}
+                                </div>
 
-                        {/* 3. Button */}
-                        <div className="w-[120px] text-right">
-                            <ViewDetailsButton />
+                                <div className="min-w-0">
+                                    <p className="text-sm font-bold text-[#343C6A] leading-tight">
+                                        {svc.name}
+                                    </p>
+
+                                    <p className="text-xs text-[#718EBF] mt-1 leading-relaxed">
+                                        {svc.description}
+                                    </p>
+                                </div>
+                            </div>
+
+                            {/* Content */}
+                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 flex-1 w-full">
+                                <TwoLineCell text={svc.col1} />
+                                <TwoLineCell text={svc.col2} />
+                                <TwoLineCell text={svc.col3} />
+                            </div>
+
+                            {/* Button */}
+                            <div className="w-full lg:w-auto lg:min-w-[140px]">
+                                <ViewDetailsButton />
+                            </div>
                         </div>
                     </div>
                 ))}
