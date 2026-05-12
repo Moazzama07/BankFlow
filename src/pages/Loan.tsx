@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { User, Briefcase, TrendingUp, Wrench } from "lucide-react";
 
-// ── Icon Components (exact same pattern as Account.tsx) ────────────────────
 
 const PersonalLoanIcon = () => (
     <div className="w-10 h-10 flex items-center justify-center rounded-xl bg-[#E7EDFF]">
@@ -27,7 +26,6 @@ const CustomLoanIcon = () => (
     </div>
 );
 
-// ── Types ──────────────────────────────────────────────────────────────────
 
 interface LoanStat {
     label: string;
@@ -45,24 +43,22 @@ interface LoanRow {
     installment: string;
 }
 
-// ── Data ───────────────────────────────────────────────────────────────────
-
 const loanStats: LoanStat[] = [
-    { label: "Personal Loans",  value: "$50,000",      Icon: PersonalLoanIcon,  cardBg: "bg-white" },
-    { label: "Corporate Loans", value: "$100,000",     Icon: CorporateLoanIcon, cardBg: "bg-white" },
-    { label: "Business Loans",  value: "$500,000",     Icon: BusinessLoanIcon,  cardBg: "bg-white" },
-    { label: "Custom Loans",    value: "Choose Money", Icon: CustomLoanIcon,    cardBg: "bg-white" },
+    { label: "Personal Loans", value: "$50,000", Icon: PersonalLoanIcon, cardBg: "bg-white" },
+    { label: "Corporate Loans", value: "$100,000", Icon: CorporateLoanIcon, cardBg: "bg-white" },
+    { label: "Business Loans", value: "$500,000", Icon: BusinessLoanIcon, cardBg: "bg-white" },
+    { label: "Custom Loans", value: "Choose Money", Icon: CustomLoanIcon, cardBg: "bg-white" },
 ];
 
 const ACTIVE_LOANS: LoanRow[] = [
-    { sl: "01.", loanMoney: "$100,000", leftToRepay: "$40,500",  duration: "8 Months",  interestRate: "12%", installment: "$2,000 / month"  },
-    { sl: "02.", loanMoney: "$500,000", leftToRepay: "$250,000", duration: "36 Months", interestRate: "10%", installment: "$8,000 / month"  },
-    { sl: "03.", loanMoney: "$900,000", leftToRepay: "$40,500",  duration: "12 Months", interestRate: "12%", installment: "$5,000 / month"  },
-    { sl: "04.", loanMoney: "$50,000",  leftToRepay: "$40,500",  duration: "25 Months", interestRate: "5%",  installment: "$2,000 / month"  },
-    { sl: "05.", loanMoney: "$50,000",  leftToRepay: "$40,500",  duration: "5 Months",  interestRate: "16%", installment: "$10,000 / month" },
-    { sl: "06.", loanMoney: "$80,000",  leftToRepay: "$25,500",  duration: "14 Months", interestRate: "8%",  installment: "$2,000 / month"  },
-    { sl: "07.", loanMoney: "$12,000",  leftToRepay: "$5,500",   duration: "9 Months",  interestRate: "13%", installment: "$500 / month"    },
-    { sl: "08.", loanMoney: "$160,000", leftToRepay: "$100,800", duration: "3 Months",  interestRate: "12%", installment: "$900 / month"    },
+    { sl: "01.", loanMoney: "$100,000", leftToRepay: "$40,500", duration: "8 Months", interestRate: "12%", installment: "$2,000 / month" },
+    { sl: "02.", loanMoney: "$500,000", leftToRepay: "$250,000", duration: "36 Months", interestRate: "10%", installment: "$8,000 / month" },
+    { sl: "03.", loanMoney: "$900,000", leftToRepay: "$40,500", duration: "12 Months", interestRate: "12%", installment: "$5,000 / month" },
+    { sl: "04.", loanMoney: "$50,000", leftToRepay: "$40,500", duration: "25 Months", interestRate: "5%", installment: "$2,000 / month" },
+    { sl: "05.", loanMoney: "$50,000", leftToRepay: "$40,500", duration: "5 Months", interestRate: "16%", installment: "$10,000 / month" },
+    { sl: "06.", loanMoney: "$80,000", leftToRepay: "$25,500", duration: "14 Months", interestRate: "8%", installment: "$2,000 / month" },
+    { sl: "07.", loanMoney: "$12,000", leftToRepay: "$5,500", duration: "9 Months", interestRate: "13%", installment: "$500 / month" },
+    { sl: "08.", loanMoney: "$160,000", leftToRepay: "$100,800", duration: "3 Months", interestRate: "12%", installment: "$900 / month" },
 ];
 
 const TOTALS = {
@@ -71,7 +67,7 @@ const TOTALS = {
     installment: "$50,000 / month",
 };
 
-// ── RepayButton ────────────────────────────────────────────────────────────
+
 
 type RepayButtonProps = {
     active?: boolean;
@@ -85,10 +81,9 @@ const RepayButton: React.FC<RepayButtonProps> = ({ active = false, onClick }) =>
             px-5 py-1.5 rounded-full text-xs font-semibold font-sans
             transition-all duration-200 whitespace-nowrap
 
-            ${
-                active
-                    ? "bg-white text-[#1814F3] border border-[#1814F3]"
-                    : "bg-transparent text-[#232323] border border-[#232323] hover:bg-[#1814F3] hover:text-white hover:border-[#1814F3]"
+            ${active
+                ? "bg-white text-[#1814F3] border border-[#1814F3]"
+                : "bg-transparent text-[#232323] border border-[#232323] hover:bg-[#1814F3] hover:text-white hover:border-[#1814F3]"
             }
         `}
     >
@@ -96,7 +91,7 @@ const RepayButton: React.FC<RepayButtonProps> = ({ active = false, onClick }) =>
     </button>
 );
 
-// ── Main Page ──────────────────────────────────────────────────────────────
+
 
 export default function Loan() {
     const [hoveredRow, setHoveredRow] = useState<string | null>(null);
@@ -123,14 +118,13 @@ export default function Loan() {
                 ))}
             </div>
 
-        {/* ── Active Loans Overview ── */}
-<h2 className="text-base font-bold text-[#343C6A] mb-3 px-1">
-    Active Loans Overview
-</h2>
+            <h2 className="text-base font-bold text-[#343C6A] mb-3 px-1">
+                Active Loans Overview
+            </h2>
 
-<div className="bg-white rounded-[20px] shadow-[0_4px_20px_rgba(0,0,0,0.04)] overflow-hidden">
+            <div className="bg-white rounded-[20px] shadow-[0_4px_20px_rgba(0,0,0,0.04)] overflow-hidden">
 
-                {/* Table */}
+
                 <div className="overflow-x-auto">
                     <table className="w-full font-sans">
                         <thead>
@@ -185,7 +179,7 @@ export default function Loan() {
                                         {row.installment}
                                     </td>
                                     <td className="pr-6 py-4">
-                                       <RepayButton active={row.sl === "01."} />
+                                        <RepayButton active={row.sl === "01."} />
                                     </td>
                                 </tr>
                             ))}
